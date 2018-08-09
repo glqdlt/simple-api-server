@@ -1,7 +1,5 @@
 package com.fourones.simpleapiserver.persistence.simpleMemoryDB.repository.account;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fourones.simpleapiserver.persistence.simpleMemoryDB.entity.account.Account;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -15,7 +13,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,11 +57,19 @@ public class AccountRepositoryTest {
     }
 
     @Test
-    public void findByAccountIdWithUpdateAccount() {
+    public void findByAccountSeqWithUpdateAccount() {
         Account account = accountRepository.findBySeq((long) 1);
         Account updatedAccount = Account.builder().seq(account.getSeq()).id("hahaha").password(account.getPassword()).regDate(new Date()).build();
         accountRepository.saveAndFlush(updatedAccount);
         Assert.assertSame("hahaha", accountRepository.findBySeq((long) 1).getId());
+    }
+
+    @Test
+    public void deleteByAccountSeq() {
+        accountRepository.deleteBySeq((long) 1);
+        Account account = accountRepository.findBySeq((long) 1);
+        log.info(account.toString());
+        Assert.assertNull(account);
     }
 
 
