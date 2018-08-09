@@ -1,0 +1,1 @@
+insert into account (id, password) values ('test-id','test-password');

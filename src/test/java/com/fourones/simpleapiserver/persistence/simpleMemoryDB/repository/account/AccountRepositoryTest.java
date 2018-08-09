@@ -68,7 +68,6 @@ public class AccountRepositoryTest {
     public void deleteByAccountSeq() {
         accountRepository.deleteBySeq((long) 1);
         Account account = accountRepository.findBySeq((long) 1);
-        log.info(account.toString());
         Assert.assertNull(account);
     }
 
