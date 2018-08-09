@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(schema = "SIMPLE_DATABASE")
 @Getter
 @ToString
 @EqualsAndHashCode
